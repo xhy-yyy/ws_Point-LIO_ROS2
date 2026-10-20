@@ -1,0 +1,11 @@
+Log/
+build/
+install/
+log/
+.deps/
+.vscode/
+__pycache__/
+*.pcd
+*.bag
+*.db3
+*.mcap

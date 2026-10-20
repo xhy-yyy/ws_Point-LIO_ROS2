@@ -1,0 +1,16 @@
+{
+  "project": "Point-LIO_ROS2",
+  "source_url": "https://github.com/uavfly/Point-LIO_ROS2.git",
+  "source_branch": "super",
+  "source_commit": "59affa2957c0e487f3b6493744e25489a8212914",
+  "prepared_snapshot_commit": "724f5a7f46177012afc11ebead63975065cd7b3f",
+  "history": "Independent repository initialized from the prepared source snapshot; upstream source notices and licenses retained.",
+  "excluded_editor_or_log_files": [
+    "Log/guide.md",
+    "include/.vscode/c_cpp_properties.json",
+    "include/.vscode/settings.json",
+    "include/IKFoM/.vscode/settings.json",
+    "include/IKFoM/IKFoM_toolkit/.vscode/settings.json",
+    "include/IKFoM/IKFoM_toolkit/esekfom/.vscode/settings.json"
+  ]
+}
