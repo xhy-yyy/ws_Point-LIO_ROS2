@@ -49,23 +49,63 @@ LIVOX_WORKSPACE=/path/to/ws_livox bash scripts/build_humble.sh
 ```
 
 自定义 glog 安装可通过 `CMAKE_PREFIX_PATH` 指定前缀。
-首次发布需将本项目推送到上述个人仓库后，克隆地址才可用于获取此版本。
 
 ## 运行
 
-驱动和定位分别使用一个终端：
+按“先启动雷达驱动，再启动 Point-LIO”的顺序，分别使用两个终端。以下命令以 `~/ws_livox` 和 `~/ws_mid360` 为工作区路径；使用其他目录时，请替换为实际路径。
+
+### 1. 启动雷达驱动（终端 1）
+
+确认 MID360 已连接、雷达 IP 与主机网口地址已配置，执行：
 
 ```bash
-# 终端 1
+source /opt/ros/humble/setup.bash
+source ~/ws_livox/install/setup.bash
+export LD_LIBRARY_PATH="$HOME/ws_livox/.deps/livox_sdk2/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+
+ros2 launch livox_ros_driver2 msg_MID360_launch.py
+```
+
+保持此终端运行，驱动应持续发布 `/livox/lidar` 点云和 `/livox/imu` 数据。网络配置见 [配套驱动工程说明](https://github.com/xhy-yyy/ws_livox_ros_driver2#网络配置)。
+
+### 2. 启动 Point-LIO（终端 2）
+
+确认驱动已发布点云和 IMU 数据后，打开另一个终端，执行：
+
+```bash
+source /opt/ros/humble/setup.bash
+source ~/ws_livox/install/setup.bash
+source ~/ws_mid360/install/setup.bash
+export LD_LIBRARY_PATH="$HOME/ws_livox/.deps/livox_sdk2/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+
+ros2 launch point_lio mapping_mid360.launch.py
+```
+
+每个终端需分别加载 ROS 和对应工作区环境。`LD_LIBRARY_PATH` 用于加载配套驱动安装的 SDK2 动态库；使用自定义 SDK 安装目录时，请替换为实际的 `lib` 路径。
+
+若已在终端中配置好上述环境，可直接依次运行两条 `ros2 launch` 命令。
+
+Point-LIO 默认关闭 RViz。如需显示建图结果，将终端 2 的启动命令替换为：
+
+```bash
+ros2 launch point_lio mapping_mid360.launch.py rviz:=true
+```
+
+### 使用启动脚本
+
+也可使用脚本完成相同的环境加载和启动，分别在两个终端执行：
+
+```bash
+# 终端 1：雷达驱动
 bash ~/ws_livox/src/livox_ros_driver2/scripts/run_mid360.sh
 ```
 
 ```bash
-# 终端 2
+# 终端 2：Point-LIO
 bash ~/ws_mid360/src/Point-LIO_ROS2/scripts/run_mid360.sh
-# 打开 RViz
-bash ~/ws_mid360/src/Point-LIO_ROS2/scripts/run_mid360.sh rviz:=true
 ```
+
+脚本支持传入相同的 ROS 2 启动参数，例如在 Point-LIO 启动脚本后添加 `rviz:=true`。
 
 ## 参数
 
