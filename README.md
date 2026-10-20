@@ -9,7 +9,7 @@
 
 ## 本工程提供的内容
 
-- 对接 [配套 MID360 驱动工程](https://github.com/xhy-yyy/livox_ros_driver2) 的自定义点云和 IMU。
+- 对接 [配套 MID360 驱动工程](https://github.com/xhy-yyy/ws_livox_ros_driver2) 的自定义点云和 IMU。
 - 每处理完一帧点云发布一次里程计和 TF；正常处理 20 Hz 点云时输出通常接近 20 Hz，需实测确认。
 - 默认关闭 RViz，节点输出写入日志，支持按需打开可视化。
 - glog 通过 CMake 查找，构建文件中没有个人工程的绝对路径。
@@ -38,7 +38,7 @@ sudo apt install build-essential cmake libeigen3-dev libpcl-dev libtbb-dev \
   ros-humble-pcl-conversions ros-humble-tf2-eigen \
   ros-humble-tf2-geometry-msgs ros-humble-visualization-msgs ros-humble-rviz2
 mkdir -p ~/ws_mid360/src
-git clone https://github.com/xhy-yyy/Point-LIO_ROS2.git ~/ws_mid360/src/Point-LIO_ROS2
+git clone https://github.com/xhy-yyy/ws_Point-LIO_ROS2.git ~/ws_mid360/src/Point-LIO_ROS2
 bash ~/ws_mid360/src/Point-LIO_ROS2/scripts/build_humble.sh
 ```
 

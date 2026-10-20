@@ -12,5 +12,6 @@
     "include/IKFoM/.vscode/settings.json",
     "include/IKFoM/IKFoM_toolkit/.vscode/settings.json",
     "include/IKFoM/IKFoM_toolkit/esekfom/.vscode/settings.json"
-  ]
+  ],
+  "repository_url": "https://github.com/xhy-yyy/ws_Point-LIO_ROS2"
 }
